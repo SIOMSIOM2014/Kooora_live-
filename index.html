@@ -66,10 +66,34 @@ body{background:#f2f5f7;color:#17232c}
 .fixture-card .matchactions{padding:0 10px 10px;background:#eceef2}
 .fixture-card .matchactions a{background:#fff}
 @media(max-width:560px){.fixture-card{margin:9px 8px}.fixture-card .match{grid-template-columns:minmax(0,1fr) 78px minmax(0,1fr);min-height:132px;padding:13px 7px}.fixture-card .team img{width:48px;height:48px}.fixture-card .team span{font-size:13px}.fixture-card .score strong{font-size:22px}.fixture-foot{font-size:12px;padding:10px 11px}}
+.tnt-section{background:#fff;border:1px solid #e2e8eb;border-radius:14px;padding:14px;margin:14px 0 16px;box-shadow:0 2px 8px #17232c08}
+.tnt-head{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-bottom:12px}
+.tnt-head h2{font-size:17px;margin:0 0 4px;color:#17232c}.tnt-head p,.tnt-note{font-size:11px;color:#71808b;margin:0;line-height:1.7}
+.tnt-head>a{font-size:11px;color:#16834d;text-decoration:none;border:1px solid #d9e9df;border-radius:8px;padding:7px 9px}
+.tnt-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.tnt-card{display:flex;flex-direction:column;gap:4px;padding:11px;border:1px solid #e3e9ed;border-radius:10px;text-decoration:none;color:#24343d;background:#fbfdfc;min-height:61px}
+.tnt-card b{font-size:13px}.tnt-card small{font-size:10px;color:#16834d}
+.tnt-card:active{background:#e8f5ed}.tnt-note{margin-top:10px}
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">⚽</div><div><h1>KOOORA LIVE</h1><p>كورة لايف · عالم كرة القدم بين يديك</p></div></div><button id="installApp" class="btn primary install-btn">⬇ تحميل التطبيق</button><div class="livepill"><i class="dot"></i>تحديث مباشر</div></header>
-<section class="hero"><h2>أهم مباريات اليوم</h2><p>نتائج ومواعيد المباريات حسب توقيت جهازك</p></section><section class="install-panel" id="installPanel"><div><strong>📲 حمّل كورة لايف على جهازك</strong><p>ثبّت التطبيق على الشاشة الرئيسية وافتحه مثل التطبيقات العادية.</p></div><button id="installMain" class="btn primary">تحميل / تثبيت الآن</button><div id="installHelp" class="install-help" hidden>إذا لم تظهر نافذة التثبيت: افتح هذا الموقع في Google Chrome، ثم اضغط على قائمة المتصفح واختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». على iPhone: افتح قائمة المشاركة ثم «إضافة إلى الشاشة الرئيسية».</div></section>
+<section class="hero"><h2>أهم مباريات اليوم</h2><p>نتائج ومواعيد المباريات حسب توقيت جهازك</p></section>
+<section class="tnt-section" aria-labelledby="tntTitle">
+ <div class="tnt-head"><div><h2 id="tntTitle">📡 القنوات المغربية TNT</h2><p>قائمة القنوات المغربية وروابط منصاتها الرسمية المتاحة</p></div><a href="https://www.haca.ma/fr/t%C3%A9l%C3%A9vision" target="_blank" rel="noopener">قائمة القنوات الرسمية ↗</a></div>
+ <div class="tnt-grid">
+  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>📺 الأولى</b><small>SNRT Live</small></a>
+  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>⚽ الرياضية</b><small>SNRT Live · القناة الرياضية</small></a>
+  <a class="tnt-card" href="https://www.2m.ma/" target="_blank" rel="noopener"><b>📺 2M المغربية</b><small>الموقع الرسمي 2M</small></a>
+  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>🎭 الرابعة الثقافية</b><small>SNRT Live</small></a>
+  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>🌍 المغربية</b><small>SNRT Live</small></a>
+  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>🕌 السادسة</b><small>SNRT Live</small></a>
+  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>🎬 أفلام TV</b><small>SNRT Live</small></a>
+  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>ⵣ تمازيغت</b><small>SNRT Live</small></a>
+  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>🏜️ العيون</b><small>SNRT Live</small></a>
+  <a class="tnt-card" href="https://www.medi1tv.com/" target="_blank" rel="noopener"><b>📰 Medi1 TV</b><small>الموقع الرسمي</small></a>
+ </div>
+ <p class="tnt-note">هذه روابط منصات الناشرين وليست روابط بث مباشر مستقلة. توفر القناة داخل المنصة أو نقلها لمباراة معينة يعتمد على حقوق البث والبرنامج المنشور من القناة.</p>
+</section><section class="install-panel" id="installPanel"><div><strong>📲 حمّل كورة لايف على جهازك</strong><p>ثبّت التطبيق على الشاشة الرئيسية وافتحه مثل التطبيقات العادية.</p></div><button id="installMain" class="btn primary">تحميل / تثبيت الآن</button><div id="installHelp" class="install-help" hidden>إذا لم تظهر نافذة التثبيت: افتح هذا الموقع في Google Chrome، ثم اضغط على قائمة المتصفح واختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». على iPhone: افتح قائمة المشاركة ثم «إضافة إلى الشاشة الرئيسية».</div></section>
 <div class="toolbar"><input id="search" class="search" placeholder="ابحث عن فريق أو بطولة..." aria-label="بحث"><select id="leagueFilter" class="search" aria-label="تصفية حسب البطولة"><option value="">كل البطولات</option></select><button class="btn primary" id="refresh">↻ تحديث الآن</button></div>
 <div class="datebar"><button class="btn" id="prev">‹ اليوم السابق</button><strong id="dateLabel">مباريات اليوم</strong><button class="btn" id="next">اليوم التالي ›</button></div>
 <div class="daystrip" id="daystrip" aria-label="اختيار اليوم"></div>
@@ -118,8 +142,8 @@ function render(){
  let live=m.state==="live",done=m.state==="finished";
  let score=(m.home.score!==""&&m.away.score!=="")?esc(m.home.score)+" - "+esc(m.away.score):"—";
  let state=live?"مباشر الآن":done?"انتهت المباراة":"لم تبدأ";
- let watch='https://www.google.com/search?q='+encodeURIComponent("الناقل الرسمي "+m.home.name+" ضد "+m.away.name+" "+m.league);
- return '<article class="fixture-card"><div class="match"><div class="team"><img loading="lazy" src="'+esc(m.home.logo)+'" onerror="this.style.visibility=\'hidden\'" alt=""><span>'+esc(m.home.name)+'</span></div><div class="score"><strong>'+score+'</strong><small class="'+(live?"status-live":done?"status-done":"")+'">'+(live?"● ":"")+esc(live?statusText(m):done?state:timeText(m))+'</small></div><div class="team away"><img loading="lazy" src="'+esc(m.away.logo)+'" onerror="this.style.visibility=\'hidden\'" alt=""><span>'+esc(m.away.name)+'</span></div></div><div class="fixture-foot"><span>'+esc(m.league)+'</span><span>📺 الناقل: '+esc((m.broadcasts||[]).join("، ")||"غير محدد في مصدر النتائج")+'</span><span>'+esc(m.venue||"معلومات الملعب غير متاحة")+'</span></div><div class="matchactions"><a href="'+watch+'" target="_blank" rel="noopener">معلومات المباراة والناقل الرسمي ↗</a></div></article>'
+ let channel=(m.broadcasts||[]).filter(Boolean).join(" ");let watch='https://www.google.com/search?q='+encodeURIComponent((channel?"مشاهدة "+channel+" ":"القناة الناقلة الرسمية ")+m.home.name+" ضد "+m.away.name+" "+m.league);
+ return '<article class="fixture-card"><div class="match"><div class="team"><img loading="lazy" src="'+esc(m.home.logo)+'" onerror="this.style.visibility=\'hidden\'" alt=""><span>'+esc(m.home.name)+'</span></div><div class="score"><strong>'+score+'</strong><small class="'+(live?"status-live":done?"status-done":"")+'">'+(live?"● ":"")+esc(live?statusText(m):done?state:timeText(m))+'</small></div><div class="team away"><img loading="lazy" src="'+esc(m.away.logo)+'" onerror="this.style.visibility=\'hidden\'" alt=""><span>'+esc(m.away.name)+'</span></div></div><div class="fixture-foot"><span>'+esc(m.league)+'</span><span>📺 الناقل: '+esc((m.broadcasts||[]).join("، ")||"غير محدد في مصدر النتائج")+'</span><span>'+esc(m.venue||"معلومات الملعب غير متاحة")+'</span></div><div class="matchactions"><a href="'+watch+'" target="_blank" rel="noopener">ابحث عن القناة الناقلة ↗</a></div></article>'
  }).join("")+'</section>').join("")
 }
 function drawDays(){

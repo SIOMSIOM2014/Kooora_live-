@@ -41,10 +41,28 @@ body{background:#f2f5f7;color:#17232c}
 .footer{color:#8a969e}
 @media(max-width:560px){.wrap{padding:10px}.hero{padding:16px}.match{grid-template-columns:minmax(0,1fr) 68px minmax(0,1fr);gap:3px;padding:12px 7px}.team img{width:24px;height:24px}.team span{font-size:11px}.score strong{font-size:16px}.dayitem{min-width:65px}}
 
+
+.dayitem:nth-child(1){border-color:#174f86}.dayitem:nth-child(1) b{color:#174f86}
+.dayitem:nth-child(3){background:#8e1b08;color:#fff;border-color:#8e1b08}.dayitem:nth-child(3) small{color:#ffe0d7}
+.dayitem:nth-child(4){border-color:#d0a600}.dayitem:nth-child(4) b{color:#9a7900}
+.fixture-card{margin:10px 12px;background:#eceef2;border-radius:13px;overflow:hidden}
+.fixture-card .match{border:0;min-height:142px;padding:16px 12px;grid-template-columns:minmax(0,1fr) 100px minmax(0,1fr)}
+.fixture-card .team,.fixture-card .team.away{flex-direction:column;justify-content:center;gap:7px;text-align:center}
+.fixture-card .team img{width:58px;height:58px;border-radius:50%;object-fit:contain;background:#fff;border:1px solid #d5d9df;padding:3px}
+.fixture-card .team span{font-size:15px;font-weight:600;color:#111}
+.fixture-card .score strong{font-size:27px;font-weight:500}
+.fixture-card .score small{display:inline-block;margin-top:9px;padding:7px 12px;border-radius:12px;background:#147343;color:#fff!important;font-size:13px}
+.fixture-card .score small.status-live{background:#a51f0c!important;color:#fff!important}
+.fixture-card .score small.status-done{background:#68737b!important;color:#fff!important}
+.fixture-foot{display:flex;justify-content:space-between;gap:10px;padding:11px 13px;border-top:1px solid #d9dce1;color:#242b30;font-size:13px}
+.fixture-foot span{min-width:0;overflow-wrap:anywhere}
+.fixture-card .matchactions{padding:0 10px 10px;background:#eceef2}
+.fixture-card .matchactions a{background:#fff}
+@media(max-width:560px){.fixture-card{margin:9px 8px}.fixture-card .match{grid-template-columns:minmax(0,1fr) 78px minmax(0,1fr);min-height:132px;padding:13px 7px}.fixture-card .team img{width:48px;height:48px}.fixture-card .team span{font-size:13px}.fixture-card .score strong{font-size:22px}.fixture-foot{font-size:12px;padding:10px 11px}}
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">⚽</div><div><h1>KOOORA LIVE</h1><p>كورة لايف · عالم كرة القدم بين يديك</p></div></div><div class="livepill"><i class="dot"></i>تحديث مباشر</div></header>
-<section class="hero"><h2>كل المباريات في مكان واحد</h2><p>تابع جدول العالم، النتائج، المباريات المباشرة ومواعيدها حسب توقيت جهازك.</p></section>
+<section class="hero"><h2>أهم مباريات اليوم</h2><p>نتائج ومواعيد المباريات حسب توقيت جهازك</p></section>
 <div class="toolbar"><input id="search" class="search" placeholder="ابحث عن فريق أو بطولة..." aria-label="بحث"><button class="btn primary" id="refresh">↻ تحديث الآن</button></div>
 <div class="datebar"><button class="btn" id="prev">‹ اليوم السابق</button><strong id="dateLabel">مباريات اليوم</strong><button class="btn" id="next">اليوم التالي ›</button></div>
 <div class="daystrip" id="daystrip" aria-label="اختيار اليوم"></div>
@@ -80,7 +98,7 @@ function render(){
  let score=(m.home.score!==""&&m.away.score!=="")?esc(m.home.score)+" - "+esc(m.away.score):"—";
  let state=live?"مباشر الآن":done?"انتهت المباراة":"لم تبدأ";
  let watch='https://www.google.com/search?q='+encodeURIComponent("الناقل الرسمي "+m.home.name+" ضد "+m.away.name+" "+m.league);
- return '<article><div class="match"><div class="team"><img loading="lazy" src="'+esc(m.home.logo)+'" onerror="this.style.visibility=\'hidden\'" alt=""><span>'+esc(m.home.name)+'</span></div><div class="score"><strong>'+score+'</strong><small class="'+(live?"status-live":done?"status-done":"")+'">'+(live?"● ":"")+esc(live?statusText(m):done?state:timeText(m))+'</small></div><div class="team away"><img loading="lazy" src="'+esc(m.away.logo)+'" onerror="this.style.visibility=\'hidden\'" alt=""><span>'+esc(m.away.name)+'</span></div></div><div class="matchactions"><a href="'+watch+'" target="_blank" rel="noopener">معلومات المباراة والناقل الرسمي ↗</a></div></article>'
+ return '<article class="fixture-card"><div class="match"><div class="team"><img loading="lazy" src="'+esc(m.home.logo)+'" onerror="this.style.visibility=\'hidden\'" alt=""><span>'+esc(m.home.name)+'</span></div><div class="score"><strong>'+score+'</strong><small class="'+(live?"status-live":done?"status-done":"")+'">'+(live?"● ":"")+esc(live?statusText(m):done?state:timeText(m))+'</small></div><div class="team away"><img loading="lazy" src="'+esc(m.away.logo)+'" onerror="this.style.visibility=\'hidden\'" alt=""><span>'+esc(m.away.name)+'</span></div></div><div class="fixture-foot"><span>'+esc(m.league)+'</span><span>'+esc(m.venue||'معلومات البطولة')+'</span></div><div class="matchactions"><a href="'+watch+'" target="_blank" rel="noopener">معلومات المباراة والناقل الرسمي ↗</a></div></article>'
  }).join("")+'</section>').join("")
 }
 function drawDays(){

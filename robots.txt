@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://siomsiom2014.github.io/Kooora_live-/sitemap.xml

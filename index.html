@@ -39,7 +39,7 @@ body{background:#f2f5f7;color:#17232c}
 .notice{background:#fff;border:1px solid #e4e9ec;border-radius:10px;padding:10px;color:#71808b}
 .empty,.loading,.error{background:#fff;color:#71808b;border-color:#dce5e9}
 .footer{color:#8a969e}
-@media(max-width:560px){.wrap{padding:10px}.hero{padding:16px}.match{grid-template-columns:minmax(0,1fr) 68px minmax(0,1fr);gap:3px;padding:12px 7px}.team img{width:24px;height:24px}.team span{font-size:11px}.score strong{font-size:16px}.dayitem{min-width:65px}}
+#leagueFilter{max-width:230px;min-width:155px;background:#fff;color:#24343d;border:1px solid #dfe6ea;border-radius:10px;padding:11px;font:inherit;flex:0 1 220px}#leagueFilter:focus{outline:2px solid #16834d;outline-offset:1px}@media(max-width:560px){#leagueFilter{max-width:none;flex:1 1 100%;width:100%}}\n@media(max-width:560px){.wrap{padding:10px}.hero{padding:16px}.match{grid-template-columns:minmax(0,1fr) 68px minmax(0,1fr);gap:3px;padding:12px 7px}.team img{width:24px;height:24px}.team span{font-size:11px}.score strong{font-size:16px}.dayitem{min-width:65px}}
 
 
 .dayitem:nth-child(1){border-color:#174f86}.dayitem:nth-child(1) b{color:#174f86}
@@ -63,7 +63,7 @@ body{background:#f2f5f7;color:#17232c}
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">⚽</div><div><h1>KOOORA LIVE</h1><p>كورة لايف · عالم كرة القدم بين يديك</p></div></div><div class="livepill"><i class="dot"></i>تحديث مباشر</div></header>
 <section class="hero"><h2>أهم مباريات اليوم</h2><p>نتائج ومواعيد المباريات حسب توقيت جهازك</p></section>
-<div class="toolbar"><input id="search" class="search" placeholder="ابحث عن فريق أو بطولة..." aria-label="بحث"><button class="btn primary" id="refresh">↻ تحديث الآن</button></div>
+<div class="toolbar"><input id="search" class="search" placeholder="ابحث عن فريق أو بطولة..." aria-label="بحث"><select id="leagueFilter" class="search" aria-label="تصفية حسب البطولة"><option value="">كل البطولات</option></select><button class="btn primary" id="refresh">↻ تحديث الآن</button></div>
 <div class="datebar"><button class="btn" id="prev">‹ اليوم السابق</button><strong id="dateLabel">مباريات اليوم</strong><button class="btn" id="next">اليوم التالي ›</button></div>
 <div class="daystrip" id="daystrip" aria-label="اختيار اليوم"></div>
 <nav class="filters" id="filters"><button class="btn active" data-filter="all">كل المباريات</button><button class="btn" data-filter="live">مباشر الآن</button><button class="btn" data-filter="upcoming">قادمة</button><button class="btn" data-filter="finished">انتهت</button></nav>
@@ -97,9 +97,12 @@ function statusText(e){let s=e.status?.type?.shortDetail||e.status?.type?.detail
 function teamData(c){let t=c?.team||{};return {name:t.displayName||t.name||"فريق",logo:t.logo||"",score:c?.score??""}}
 function normalize(e,l){let c=e.competitions?.[0]||{};let competitors=c.competitors||[];let home=competitors.find(x=>x.homeAway==="home")||competitors[0]||{};let away=competitors.find(x=>x.homeAway==="away")||competitors[1]||{};return {id:e.id,name:e.name||e.shortName||"",date:e.date,league:l.name,logo:l.logo||"",state:eventState(e),status:e.status,home:teamData(home),away:teamData(away),venue:c.venue?.fullName||"",country:c.venue?.address?.city||""}}
 async function load(){if(busy)return;busy=true;$("matches").innerHTML='<div class="loading">⏳ جارٍ تحديث النتائج والمواعيد...</div>';$("count").textContent="جارٍ التحميل";$("dateLabel").textContent=localDate(day);let key=dateKey(day);let results=await Promise.allSettled(leagues.map(async l=>{let u='https://site.api.espn.com/apis/site/v2/sports/soccer/'+l.code+'/scoreboard?dates='+key;let r=await fetch(u,{cache:"no-store"});if(!r.ok)throw Error("HTTP "+r.status);let j=await r.json();return (j.events||[]).map(e=>normalize(e,l))}));allMatches=results.flatMap(x=>x.status==="fulfilled"?x.value:[]);allMatches.sort((a,b)=>new Date(a.date)-new Date(b.date));busy=false;render();if(!allMatches.length)$("count").textContent="لم تصل مباريات لهذا اليوم من المصادر المتاحة";}
+function populateLeagueFilter(){const s=$("leagueFilter");if(!s)return;const current=s.value;const names=[...new Set(leagues.map(x=>x.name))].sort((a,b)=>a.localeCompare(b,"ar"));s.innerHTML='<option value="">كل البطولات</option>'+names.map(n=>'<option value="'+esc(n)+'">'+esc(n)+'</option>').join("");if(names.includes(current))s.value=current}
+populateLeagueFilter();
 function render(){
  let q=$("search").value.trim().toLowerCase();
- let list=allMatches.filter(m=>(filter==="all"||m.state===filter)&&(!q||(m.home.name+" "+m.away.name+" "+m.league).toLowerCase().includes(q)));
+ let selectedLeague=$("leagueFilter").value;
+ let list=allMatches.filter(m=>(filter==="all"||m.state===filter)&&(!selectedLeague||m.league===selectedLeague)&&(!q||(m.home.name+" "+m.away.name+" "+m.league).toLowerCase().includes(q)));
  $("count").textContent=list.length+" مباراة · ضمن البطولات المدرجة";
  $("timezone").textContent=Intl.DateTimeFormat().resolvedOptions().timeZone||"التوقيت المحلي";
  if(!list.length){$("matches").innerHTML='<div class="empty">لا توجد مباريات مطابقة لهذا اليوم في مصدر البيانات الحالي.<br>اختر يوماً آخر أو غيّر التصفية.</div>';return}
@@ -120,5 +123,5 @@ function drawDays(){
  b.addEventListener("click",()=>{day=d;load();drawDays()});host.appendChild(b)}
 }
 
-$("refresh").addEventListener("click",load);$("prev").addEventListener("click",()=>{day.setDate(day.getDate()-1);load();drawDays()});$("next").addEventListener("click",()=>{day.setDate(day.getDate()+1);load();drawDays()});$("search").addEventListener("input",render);$("filters").addEventListener("click",e=>{let b=e.target.closest("button[data-filter]");if(!b)return;filter=b.dataset.filter;document.querySelectorAll("#filters button").forEach(x=>x.classList.toggle("active",x===b));render()});$("year").textContent=new Date().getFullYear();drawDays();$("timezone").textContent=Intl.DateTimeFormat().resolvedOptions().timeZone||"";if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}load();setInterval(()=>{if(dateKey(day)===dateKey(new Date()))load()},60000);
+$("refresh").addEventListener("click",load);$("prev").addEventListener("click",()=>{day.setDate(day.getDate()-1);load();drawDays()});$("next").addEventListener("click",()=>{day.setDate(day.getDate()+1);load();drawDays()});$("search").addEventListener("input",render);$("leagueFilter").addEventListener("change",render);$("filters").addEventListener("click",e=>{let b=e.target.closest("button[data-filter]");if(!b)return;filter=b.dataset.filter;document.querySelectorAll("#filters button").forEach(x=>x.classList.toggle("active",x===b));render()});$("year").textContent=new Date().getFullYear();drawDays();$("timezone").textContent=Intl.DateTimeFormat().resolvedOptions().timeZone||"";if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}load();setInterval(()=>{if(dateKey(day)===dateKey(new Date()))load()},60000);
 </script></body></html>

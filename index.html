@@ -69,12 +69,23 @@ body{background:#f2f5f7;color:#17232c}
 <nav class="filters" id="filters"><button class="btn active" data-filter="all">كل المباريات</button><button class="btn" data-filter="live">مباشر الآن</button><button class="btn" data-filter="upcoming">قادمة</button><button class="btn" data-filter="finished">انتهت</button></nav>
 <div class="meta"><span id="count">جارٍ تحميل المباريات...</span><span id="timezone"></span></div>
 <div id="matches"><div class="loading">⏳ جارٍ جلب جدول المباريات من مصادر النتائج...</div></div>
-<p class="notice">تُعرض النتائج والمواعيد من مزود بيانات رياضي عام (ESPN). قد لا تتوفر بيانات كل البطولات أو كل المباريات. روابط المشاهدة توجهك للبحث عن الناقل الرسمي في بلدك؛ التطبيق لا يستضيف بثاً غير مرخص.</p>
+<p class="notice">تُعرض النتائج والمواعيد من واجهة ESPN العامة. تشمل القائمة بطولات أوروبية وإفريقية وآسيوية ومنافسات عربية متاحة لدى المصدر؛ لا يضمن المصدر تغطية كل بطولة عربية، وكأس العرب غير مؤكد ضمن قائمته الحالية. روابط المشاهدة توجهك للبحث عن الناقل الرسمي في بلدك؛ التطبيق لا يستضيف بثاً غير مرخص.</p>
 <footer class="footer">© <span id="year"></span> KOOORA LIVE · كورة لايف<br>المواعيد معروضة حسب المنطقة الزمنية لجهازك</footer>
 </main>
 <script>
 const leagues=[
-{ name:"الدوري الإنجليزي",code:"eng.1"},{name:"الدوري الإسباني",code:"esp.1"},{name:"الدوري الإيطالي",code:"ita.1"},{name:"الدوري الألماني",code:"ger.1"},{name:"الدوري الفرنسي",code:"fra.1"},{name:"دوري أبطال أوروبا",code:"uefa.champions"},{name:"الدوري الأوروبي",code:"uefa.europa"},{name:"الدوري الأمريكي",code:"usa.1"},{name:"الدوري الهولندي",code:"ned.1"},{name:"الدوري البرتغالي",code:"por.1"},{name:"الدوري التركي",code:"tur.1"},{name:"الدوري السعودي",code:"ksa.1"},{name:"الدوري المكسيكي",code:"mex.1"},{name:"الدوري البرازيلي",code:"bra.1"}
+/* البطولات الأوروبية */
+{name:"الدوري الإنجليزي الممتاز",code:"eng.1"},{name:"دوري الدرجة الأولى الإنجليزي",code:"eng.2"},{name:"كأس الاتحاد الإنجليزي",code:"eng.fa"},{name:"كأس الرابطة الإنجليزية",code:"eng.league_cup"},
+{name:"الدوري الإسباني",code:"esp.1"},{name:"كأس ملك إسبانيا",code:"esp.copa_del_rey"},{name:"الدوري الإيطالي",code:"ita.1"},{name:"كأس إيطاليا",code:"ita.coppa_italia"},
+{name:"الدوري الألماني",code:"ger.1"},{name:"كأس ألمانيا",code:"ger.dfb_pokal"},{name:"الدوري الفرنسي",code:"fra.1"},{name:"كأس فرنسا",code:"fra.coupe_de_france"},
+{name:"الدوري الهولندي",code:"ned.1"},{name:"الدوري البرتغالي",code:"por.1"},{name:"الدوري التركي",code:"tur.1"},{name:"الدوري البلجيكي",code:"bel.1"},{name:"الدوري الاسكتلندي",code:"sco.1"},
+{name:"دوري أبطال أوروبا",code:"uefa.champions"},{name:"الدوري الأوروبي",code:"uefa.europa"},{name:"دوري المؤتمر الأوروبي",code:"uefa.europa.conf"},{name:"كأس السوبر الأوروبي",code:"uefa.super_cup"},
+{name:"دوري الأمم الأوروبية",code:"uefa.nations"},{name:"بطولة أمم أوروبا",code:"uefa.euro"},
+/* بطولات المنتخبات والبطولات العربية المتاحة لدى مزود البيانات */
+{name:"كأس أمم إفريقيا",code:"caf.nations"},{name:"تصفيات كأس أمم إفريقيا",code:"caf.nations_qual"},{name:"دوري أبطال إفريقيا",code:"caf.champions"},{name:"كأس الكونفدرالية الإفريقية",code:"caf.confed"},
+{name:"تصفيات كأس العالم - إفريقيا",code:"fifa.worldq.caf"},{name:"تصفيات كأس العالم - آسيا",code:"fifa.worldq.afc"},{name:"المباريات الدولية الودية",code:"fifa.friendly"},
+{name:"كأس آسيا",code:"afc.asian.cup"},{name:"دوري أبطال آسيا",code:"afc.champions"},{name:"دوري أبطال آسيا 2",code:"afc.cup"},
+{name:"الدوري السعودي",code:"ksa.1"},{name:"كأس الملك السعودي",code:"ksa.kings.cup"}
 ];
 const $=id=>document.getElementById(id);let day=new Date();let allMatches=[];let filter="all";let busy=false;
 const dateKey=d=>d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0");
@@ -89,7 +100,7 @@ async function load(){if(busy)return;busy=true;$("matches").innerHTML='<div clas
 function render(){
  let q=$("search").value.trim().toLowerCase();
  let list=allMatches.filter(m=>(filter==="all"||m.state===filter)&&(!q||(m.home.name+" "+m.away.name+" "+m.league).toLowerCase().includes(q)));
- $("count").textContent=list.length+" مباراة · ضمن البطولات المتاحة";
+ $("count").textContent=list.length+" مباراة · ضمن البطولات المدرجة";
  $("timezone").textContent=Intl.DateTimeFormat().resolvedOptions().timeZone||"التوقيت المحلي";
  if(!list.length){$("matches").innerHTML='<div class="empty">لا توجد مباريات مطابقة لهذا اليوم في مصدر البيانات الحالي.<br>اختر يوماً آخر أو غيّر التصفية.</div>';return}
  let groups=new Map();list.forEach(m=>{if(!groups.has(m.league))groups.set(m.league,[]);groups.get(m.league).push(m)});

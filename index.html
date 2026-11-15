@@ -74,27 +74,41 @@ body{background:#f2f5f7;color:#17232c}
 .tnt-card{display:flex;flex-direction:column;gap:4px;padding:11px;border:1px solid #e3e9ed;border-radius:10px;text-decoration:none;color:#24343d;background:#fbfdfc;min-height:61px}
 .tnt-card b{font-size:13px}.tnt-card small{font-size:10px;color:#16834d}
 .tnt-card:active{background:#e8f5ed}.tnt-note{margin-top:10px}
+
+.tnt-card{font:inherit;text-align:right;cursor:pointer;width:100%}
+.tnt-player{position:fixed;z-index:9999;inset:0;background:#101820f2;padding:14px;display:flex;flex-direction:column;gap:10px}
+.tnt-player[hidden]{display:none}
+.tnt-player-head{display:flex;align-items:center;justify-content:space-between;gap:10px;color:#fff}
+.tnt-player iframe{width:100%;height:100%;min-height:260px;border:0;border-radius:12px;background:#000}
+.tnt-player .tnt-note{color:#d6e3dc;margin:0}
+@media(min-width:700px){.tnt-player{inset:4vh 8vw;border-radius:16px}.tnt-player iframe{min-height:400px}}
 </style></head>
 <body><main class="wrap">
 <header class="top"><div class="brand"><div class="logo">⚽</div><div><h1>KOOORA LIVE</h1><p>كورة لايف · عالم كرة القدم بين يديك</p></div></div><button id="installApp" class="btn primary install-btn">⬇ تحميل التطبيق</button><div class="livepill"><i class="dot"></i>تحديث مباشر</div></header>
 <section class="hero"><h2>أهم مباريات اليوم</h2><p>نتائج ومواعيد المباريات حسب توقيت جهازك</p></section>
 <section class="tnt-section" aria-labelledby="tntTitle">
- <div class="tnt-head"><div><h2 id="tntTitle">📡 القنوات المغربية TNT</h2><p>قائمة القنوات المغربية وروابط منصاتها الرسمية المتاحة</p></div><a href="https://www.haca.ma/fr/t%C3%A9l%C3%A9vision" target="_blank" rel="noopener">قائمة القنوات الرسمية ↗</a></div>
+ <div class="tnt-head"><div><h2 id="tntTitle">📡 القنوات المغربية TNT</h2><p>اختر القناة لتشغيل البث الرسمي داخل KOOORA LIVE</p></div></div>
  <div class="tnt-grid">
-  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>📺 الأولى</b><small>SNRT Live</small></a>
-  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>⚽ الرياضية</b><small>SNRT Live · القناة الرياضية</small></a>
-  <a class="tnt-card" href="https://www.2m.tv/" target="_blank" rel="noopener"><b>📺 2M المغربية</b><small>الموقع الرسمي 2M</small></a>
-  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>🎭 الرابعة الثقافية</b><small>SNRT Live</small></a>
-  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>🌍 المغربية</b><small>SNRT Live</small></a>
-  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>🕌 السادسة</b><small>SNRT Live</small></a>
-  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>🎬 أفلام TV</b><small>SNRT Live</small></a>
-  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>ⵣ تمازيغت</b><small>SNRT Live</small></a>
-  <a class="tnt-card" href="https://snrtlive.ma/" target="_blank" rel="noopener"><b>🏜️ العيون</b><small>SNRT Live</small></a>
-  <a class="tnt-card" href="https://www.medi1tv.ma/" target="_blank" rel="noopener"><b>📰 Medi1 TV</b><small>الموقع الرسمي</small></a>
+  <button class="tnt-card" type="button" data-player-title="الأولى" data-player-url="https://snrtlive.ma/ar/al-aoula"><b>📺 الأولى</b><small>مشغّل SNRT الرسمي</small></button>
+  <button class="tnt-card" type="button" data-player-title="الرياضية" data-player-url="https://snrtlive.ma/ar/arryadia"><b>⚽ الرياضية</b><small>مشغّل SNRT الرسمي</small></button>
+  <button class="tnt-card" type="button" data-player-title="الرابعة الثقافية" data-player-url="https://snrtlive.ma/ar/athaqafia"><b>🎭 الرابعة الثقافية</b><small>مشغّل SNRT الرسمي</small></button>
+  <button class="tnt-card" type="button" data-player-title="المغربية" data-player-url="https://snrtlive.ma/ar/almaghribia"><b>🌍 المغربية</b><small>مشغّل SNRT الرسمي</small></button>
+  <button class="tnt-card" type="button" data-player-title="السادسة" data-player-url="https://snrtlive.ma/ar/assadissa"><b>🕌 السادسة</b><small>مشغّل SNRT الرسمي</small></button>
+  <button class="tnt-card" type="button" data-player-title="أفلام TV" data-player-url="https://snrtlive.ma/ar/aflam-tv"><b>🎬 أفلام TV</b><small>مشغّل SNRT الرسمي</small></button>
+  <button class="tnt-card" type="button" data-player-title="تمازيغت" data-player-url="https://snrtlive.ma/ar/tamazight"><b>ⵣ تمازيغت</b><small>مشغّل SNRT الرسمي</small></button>
+  <button class="tnt-card" type="button" data-player-title="العيون" data-player-url="https://snrtlive.ma/ar/laayoune"><b>🏜️ العيون</b><small>مشغّل SNRT الرسمي</small></button>
+  <button class="tnt-card" type="button" data-player-title="MEDI1TV Arabic" data-player-url="https://medi1tv.player.easybroadcast.io/events/83_medi1tv-arabic_g90v4ec"><b>📰 MEDI1TV العربية</b><small>مشغّل MEDI1TV الرسمي</small></button>
+  <button class="tnt-card" type="button" data-player-title="MEDI1TV Maghreb" data-player-url="https://medi1tv.player.easybroadcast.io/events/83_medi1tv-maghreb_jnbspmg"><b>📰 MEDI1TV المغرب</b><small>مشغّل MEDI1TV الرسمي</small></button>
+  <button class="tnt-card" type="button" data-player-title="MEDI1TV Afrique" data-player-url="https://medi1tv.player.easybroadcast.io/events/83_medi1tv-afrique_tm7tu45"><b>🌍 MEDI1TV إفريقيا</b><small>مشغّل MEDI1TV الرسمي</small></button>
  </div>
- <p class="tnt-note">هذه روابط منصات الناشرين الرسمية وليست روابط بث مباشر مستقلة. توفر القناة أو نقل مباراة معينة يعتمد على حقوق البث والبرنامج المنشور من القناة.</p>
- <p class="tnt-note"><strong>بخصوص نجمة 6:</strong> التطبيق لا يغيّر طريقة احتساب استهلاك البيانات ولا يفتح الإنترنت المجاني. تشغيل هذه الروابط ضمن الباقة يتوقف على شروط شركة الاتصالات والنطاقات التي تعتمدها رسمياً؛ وقد يُحتسب الاستهلاك من رصيد الإنترنت العادي.</p>
-</section><section class="install-panel" id="installPanel"><div><strong>📲 حمّل كورة لايف على جهازك</strong><p>ثبّت التطبيق على الشاشة الرئيسية وافتحه مثل التطبيقات العادية.</p></div><button id="installMain" class="btn primary">تحميل / تثبيت الآن</button><div id="installHelp" class="install-help" hidden>إذا لم تظهر نافذة التثبيت: افتح هذا الموقع في Google Chrome، ثم اضغط على قائمة المتصفح واختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». على iPhone: افتح قائمة المشاركة ثم «إضافة إلى الشاشة الرئيسية».</div></section>
+ <p class="tnt-note">تُفتح المشغّلات داخل هذه الصفحة. يعتمد توفر البث على الناشر وحقوقه واتصالك. لم نضف 2M كبث داخلي لعدم العثور على مشغّل رسمي مضمّن يمكن التحقق منه.</p>
+ <p class="tnt-note"><strong>نجمة 6:</strong> لا يستطيع التطبيق تغيير احتساب البيانات؛ قد يُحتسب البث من رصيد الإنترنت العادي وفق شروط شركة الاتصالات.</p>
+</section>
+<div class="tnt-player" id="tntPlayer" hidden role="dialog" aria-modal="true" aria-labelledby="tntPlayerTitle">
+ <div class="tnt-player-head"><strong id="tntPlayerTitle">مشغّل القناة</strong><button class="btn" id="tntPlayerClose" type="button">✕ إغلاق</button></div>
+ <iframe id="tntPlayerFrame" title="مشغّل القناة" allow="autoplay; encrypted-media; fullscreen; picture-in-picture" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>
+ <p class="tnt-note">إذا منع الناشر التضمين أو لم يبدأ البث، فقد لا تعمل القناة داخل المتصفح المضمّن.</p>
+</div><section class="install-panel" id="installPanel"><div><strong>📲 حمّل كورة لايف على جهازك</strong><p>ثبّت التطبيق على الشاشة الرئيسية وافتحه مثل التطبيقات العادية.</p></div><button id="installMain" class="btn primary">تحميل / تثبيت الآن</button><div id="installHelp" class="install-help" hidden>إذا لم تظهر نافذة التثبيت: افتح هذا الموقع في Google Chrome، ثم اضغط على قائمة المتصفح واختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية». على iPhone: افتح قائمة المشاركة ثم «إضافة إلى الشاشة الرئيسية».</div></section>
 <div class="toolbar"><input id="search" class="search" placeholder="ابحث عن فريق أو بطولة..." aria-label="بحث"><select id="leagueFilter" class="search" aria-label="تصفية حسب البطولة"><option value="">كل البطولات</option></select><button class="btn primary" id="refresh">↻ تحديث الآن</button></div>
 <div class="datebar"><button class="btn" id="prev">‹ اليوم السابق</button><strong id="dateLabel">مباريات اليوم</strong><button class="btn" id="next">اليوم التالي ›</button></div>
 <div class="daystrip" id="daystrip" aria-label="اختيار اليوم"></div>
@@ -155,5 +169,16 @@ function drawDays(){
  b.addEventListener("click",()=>{day=d;load();drawDays()});host.appendChild(b)}
 }
 
+const tntPlayer=$("tntPlayer"),tntPlayerFrame=$("tntPlayerFrame"),tntPlayerTitle=$("tntPlayerTitle");
+document.querySelectorAll(".tnt-card[data-player-url]").forEach(card=>card.addEventListener("click",()=>{
+ tntPlayerTitle.textContent=card.dataset.playerTitle||"مشغّل القناة";
+ tntPlayerFrame.src=card.dataset.playerUrl;
+ tntPlayer.hidden=false;
+ document.body.style.overflow="hidden";
+}));
+function closeTntPlayer(){tntPlayerFrame.src="about:blank";tntPlayer.hidden=true;document.body.style.overflow=""}
+$("tntPlayerClose").addEventListener("click",closeTntPlayer);
+tntPlayer.addEventListener("click",e=>{if(e.target===tntPlayer)closeTntPlayer()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!tntPlayer.hidden)closeTntPlayer()});
 const installButton=$("installApp"),installMain=$("installMain"),installHelp=$("installHelp");let installPrompt=null;const isInstalled=()=>window.matchMedia("(display-mode: standalone)").matches||window.navigator.standalone===true;if(isInstalled()){$("installPanel").hidden=true;installButton.hidden=true}window.addEventListener("beforeinstallprompt",e=>{e.preventDefault();installPrompt=e});async function startInstall(){if(installPrompt){installPrompt.prompt();const choice=await installPrompt.userChoice;if(choice.outcome==="accepted"){$("installPanel").hidden=true;installButton.hidden=true}installPrompt=null;return}installHelp.hidden=!installHelp.hidden;installHelp.scrollIntoView({behavior:"smooth",block:"nearest"})}installButton.addEventListener("click",startInstall);installMain.addEventListener("click",startInstall);window.addEventListener("appinstalled",()=>{$("installPanel").hidden=true;installButton.hidden=true;installPrompt=null});$("refresh").addEventListener("click",load);$("prev").addEventListener("click",()=>{day.setDate(day.getDate()-1);load();drawDays()});$("next").addEventListener("click",()=>{day.setDate(day.getDate()+1);load();drawDays()});$("search").addEventListener("input",render);$("leagueFilter").addEventListener("change",render);$("filters").addEventListener("click",e=>{let b=e.target.closest("button[data-filter]");if(!b)return;filter=b.dataset.filter;document.querySelectorAll("#filters button").forEach(x=>x.classList.toggle("active",x===b));render()});$("year").textContent=new Date().getFullYear();drawDays();$("timezone").textContent=Intl.DateTimeFormat().resolvedOptions().timeZone||"";if("serviceWorker" in navigator){window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}))}load();setInterval(()=>{if(dateKey(day)===dateKey(new Date()))load()},60000);
 </script></body></html>
